@@ -5,7 +5,7 @@ git add .
 git commit -m "{{ message }}" -m "{{ comment }}"
 git push origin HEAD:dev
 git push origin HEAD:master
-cd /app/site
+cd /www/app/site
 git checkout dev
 git pull
 git checkout master
