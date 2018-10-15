@@ -44,7 +44,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	m := tasks.Ask("Enter commit message: ", reader, true)
-	c := tasks.Ask("Enter comment (press Enter to skip): ", reader, false)
+	c := tasks.Ask("Enter comment (press <Enter> to skip): ", reader, false)
 
 	cs := tasks.LoadCommands(fs.ReadFromFile(commitrList), m, c)
 	tasks.ExecCommands(cs)
