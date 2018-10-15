@@ -1,6 +1,7 @@
 git stash --include-untracked
 git pull
 git stash pop
+git add .
 git commit -m "{{ message }}" -m "{{ comment }}"
 git push origin HEAD:dev
 git push origin HEAD:master
