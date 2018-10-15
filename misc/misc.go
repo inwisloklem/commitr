@@ -21,7 +21,6 @@ func RemoveEmpty(s string) bool {
 	if s == "" {
 		return false
 	}
-
 	return true
 }
 
