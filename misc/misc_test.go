@@ -14,7 +14,7 @@ var (
 
 func TestFilter(t *testing.T) {
 	if !reflect.DeepEqual(misc.Filter(toFilter, misc.RemoveEmpty), filtered) {
-		t.Error("Filtered array doesn't match expected output from Filter.")
+		t.Error("Filtered array doesn't match expected output from Filter")
 	}
 }
 
