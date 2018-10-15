@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"commitr/fs"
 	"flag"
 	"fmt"
 	"os"
@@ -9,6 +10,8 @@ import (
 	"commitr/cli"
 	"commitr/tasks"
 )
+
+const commitrList string = "./.commitr"
 
 var (
 	commit, version string
@@ -39,9 +42,12 @@ func main() {
 	cli.CheckHelp(h)
 	cli.CheckVersion(v, version, commit)
 
-	r := bufio.NewReader(os.Stdin)
-	m := tasks.Ask("Enter commit message: ", r)
-	c := tasks.Ask("Enter comment: ", r)
+	reader := bufio.NewReader(os.Stdin)
+	m := tasks.Ask("Enter commit message: ", reader, true)
+	c := tasks.Ask("Enter comment (press Enter to skip): ", reader, false)
 
-	fmt.Printf("%v %v", m, c)
+	cs := tasks.LoadCommands(fs.ReadFromFile(commitrList), m, c)
+	tasks.ExecCommands(cs)
+
+	fmt.Println("Success! All commands was executed as planned.")
 }
