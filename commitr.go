@@ -12,8 +12,7 @@ import (
 
 var (
 	commit, version string
-
-	h, v bool
+	h, v            bool
 )
 
 func init() {
@@ -37,16 +36,12 @@ func init() {
 }
 
 func main() {
-	version = "v.0.1.0"
-	commit = "b7a5a6c"
-
 	cli.CheckHelp(h)
 	cli.CheckVersion(v, version, commit)
 
-	reader := bufio.NewReader(os.Stdin)
+	r := bufio.NewReader(os.Stdin)
+	m := tasks.Ask("Enter commit message: ", r)
+	c := tasks.Ask("Enter comment: ", r)
 
-	message := tasks.Ask("Enter commit message: ", reader)
-	comment := tasks.Ask("Enter comment: ", reader)
-
-	fmt.Printf("%v %v", message, comment)
+	fmt.Printf("%v %v", m, c)
 }
