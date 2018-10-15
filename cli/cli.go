@@ -41,6 +41,7 @@ func CheckVersion(f bool, version, commit string) {
 // PrintUsage prints usage info based on provided options
 func PrintUsage() {
 	fmt.Println("usage: commitr [-h | --help] [-v | --version]")
+	fmt.Println("list of commit commands in file .commitr-list")
 
 	var max int
 	flag.VisitAll(func(f *flag.Flag) {
