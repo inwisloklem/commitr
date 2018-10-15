@@ -11,7 +11,7 @@ import (
 	"commitr/tasks"
 )
 
-const commitrList string = "./.commitr"
+const commitrList string = "./.commitr-list"
 
 var (
 	commit, version string
