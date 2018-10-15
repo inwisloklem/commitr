@@ -40,7 +40,7 @@ func CheckVersion(f bool, version, commit string) {
 
 // PrintUsage prints usage info based on provided options
 func PrintUsage() {
-	fmt.Println("usage: makesujet [-a | --articles] [-p | --padding] [-h | --help] [-v | --version]")
+	fmt.Println("usage: commitr [-h | --help] [-v | --version]")
 
 	var max int
 	flag.VisitAll(func(f *flag.Flag) {
