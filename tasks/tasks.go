@@ -3,6 +3,7 @@ package tasks
 import (
 	"bufio"
 	"fmt"
+	"os"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -28,6 +29,12 @@ func Ask(q string, reader *bufio.Reader, required bool) string {
 // ExecuteSync synchronously executes command
 func ExecuteSync(cmd string) {
 	fmt.Printf("\nRunning command: %v\n", cmd)
+
+	if strings.HasPrefix(cmd, "cd") {
+		err := os.Chdir(cmd[3:len(cmd)])
+		misc.HandleFatalError(err, "Change dir error")
+		return
+	}
 
 	c := exec.Command("script", "-qfc", cmd, "/dev/null")
 
@@ -57,8 +64,9 @@ func ExecCommands(cmds []string) {
 
 // LoadCommands loads a list of OS commands from file
 func LoadCommands(fs, m, c string) []string {
-	re := strings.NewReplacer(`{{\s*message\s*}}`, m, `{{\s*commit\s*}}`, c)
+	re := strings.NewReplacer("{{ message }}", m, "{{ comment }}", c)
 	strs := strings.Split(re.Replace(fs), "\n")
+	fmt.Println(strs)
 
 	return misc.Filter(strs, misc.RemoveEmpty)
 }
