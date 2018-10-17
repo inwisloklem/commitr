@@ -43,8 +43,8 @@ func main() {
 	cli.CheckVersion(v, version, commit)
 
 	reader := bufio.NewReader(os.Stdin)
-	m := tasks.Ask("Enter commit message: ", reader, true)
-	c := tasks.Ask("Enter comment (press <Enter> to skip): ", reader, false)
+	m := tasks.AskRequired("Enter commit message: ", reader)
+	c := tasks.Ask("Enter comment (press <Enter> to skip): ", reader)
 
 	cs := tasks.LoadCommands(fs.ReadFromFile(commitrList), m, c)
 	tasks.ExecCommands(cs)
