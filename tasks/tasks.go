@@ -20,7 +20,6 @@ func justAsk(q string, reader *bufio.Reader) string {
 // AskRequired reads from command line and answer is required
 func AskRequired(q string, reader *bufio.Reader) string {
 	s := misc.TrimWhitespace(justAsk(q, reader))
-
 	if s == "" {
 		fmt.Println("This field can't be blank. Please try again.")
 		AskRequired(q, reader)

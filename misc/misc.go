@@ -14,6 +14,7 @@ func Filter(vs []string, f func(string) bool) []string {
 			vsf = append(vsf, v)
 		}
 	}
+
 	return vsf
 }
 
@@ -22,6 +23,7 @@ func RemoveEmpty(s string) bool {
 	if s == "" {
 		return false
 	}
+
 	return true
 }
 
