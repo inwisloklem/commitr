@@ -3,6 +3,7 @@ package misc
 import (
 	"fmt"
 	"os"
+	"regexp"
 )
 
 // Filter filters an array of strings
@@ -37,4 +38,9 @@ func HandleFatalError(err error, msg string) {
 		fmt.Println(msg)
 		os.Exit(1)
 	}
+}
+
+// TrimWhitespace trims whitespace characters from string
+func TrimWhitespace(s string) string {
+	return regexp.MustCompile(`\r|\n|^\s+|\s+$`).ReplaceAllString(s, "")
 }
