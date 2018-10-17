@@ -5,25 +5,33 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"regexp"
 	"strings"
 
 	"commitr/misc"
 )
 
-// Ask reads from command line
-func Ask(q string, reader *bufio.Reader, required bool) string {
+func justAsk(q string, reader *bufio.Reader) string {
 	fmt.Print(q)
-
 	s, _ := reader.ReadString('\n')
-	res := regexp.MustCompile(`\r|\n|^\s+|\s+$`).ReplaceAllString(s, "")
 
-	if required == true && res == "" {
+	return s
+}
+
+// AskRequired reads from command line and answer is required
+func AskRequired(q string, reader *bufio.Reader) string {
+	s := misc.TrimWhitespace(justAsk(q, reader))
+
+	if s == "" {
 		fmt.Println("This field can't be blank. Please try again.")
-		Ask(q, reader, required)
+		AskRequired(q, reader)
 	}
 
-	return res
+	return s
+}
+
+// Ask reads from command line
+func Ask(q string, reader *bufio.Reader) string {
+	return misc.TrimWhitespace(justAsk(q, reader))
 }
 
 // ExecuteSync synchronously executes command
